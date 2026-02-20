@@ -37,7 +37,7 @@ const Contact: React.FC = () => {
         className="absolute bottom-0 left-0 w-64 h-64 opacity-20 pointer-events-none bg-contain bg-no-repeat bg-bottom-left"
         style={{ backgroundImage: "url(/images/ethiopia-buna.png)" }}
       ></div>
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">

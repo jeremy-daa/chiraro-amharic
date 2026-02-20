@@ -5,7 +5,7 @@ import { Star } from 'lucide-react';
 const Testimonials: React.FC = () => {
   return (
     <section id="testimonials" className="py-24 bg-brand-bg border-t border-black/5">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             What our <span className="inline-block bg-brand-lime px-4 py-1 rounded-full border border-black transform -rotate-1">Students</span> Say

@@ -9,7 +9,7 @@ const Process: React.FC = () => {
         className="absolute top-0 left-0 w-96 h-96 opacity-5 pointer-events-none bg-contain bg-no-repeat bg-top-left -translate-x-10 -translate-y-10 rotate-45"
         style={{ backgroundImage: 'url(/images/ethiopian-kirar.png)' }}
       ></div>
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Language Learning For All <span className="inline-block bg-brand-pink border border-black px-4 rounded-full text-white transform -rotate-2">People</span>

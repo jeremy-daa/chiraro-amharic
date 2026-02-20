@@ -9,7 +9,7 @@ const About: React.FC = () => {
         className="absolute bottom-0 left-0 w-80 h-80 opacity-10 pointer-events-none bg-contain bg-no-repeat bg-bottom-left"
         style={{ backgroundImage: "url(/images/tej.png)" }}
       ></div>
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Why{" "}
@@ -42,8 +42,10 @@ const About: React.FC = () => {
                 </p>
                 <p>
                   Using a modern curriculum based on Communicative Language
-                  Teaching (CLT), our lessons focus on real-life practice,
-                  making learning both engaging and practical.
+                  Teaching (CLT), our lessons focus on real-life practice.
+                  Whether you prefer learning <strong>Online</strong> from
+                  anywhere in the world, or <strong>In-Person</strong> with us
+                  here locally, we offer flexible options to fit your lifestyle.
                 </p>
                 <div className="pt-4">
                   <a

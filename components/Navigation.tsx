@@ -28,7 +28,7 @@ const Navigation: React.FC = () => {
           : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto px-6 flex justify-between items-center">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 flex justify-between items-center">
         {/* Logo */}
         <a href="#" className="block">
           <img
@@ -47,7 +47,7 @@ const Navigation: React.FC = () => {
               ጭ
             </div>
             <span className="text-xl font-bold tracking-tight text-black">
-              Chiraro
+              Chiraro Amharic
             </span>
           </div>
         </a>

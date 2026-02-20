@@ -1,33 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
+import { PHRASES } from "@/constants";
 
 const Hero: React.FC = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayWords, setDisplayWords] = useState<typeof allWords>([]);
+  const [displayWords, setDisplayWords] = useState<typeof PHRASES>([]);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  const allWords = [
-    { amharic: "ሰላም", phonetic: "Selam", english: "Hello / Peace", icon: "👋" },
-    { amharic: "ቡና", phonetic: "Buna", english: "Coffee", icon: "☕" },
-    { amharic: "ፍቅር", phonetic: "Fikir", english: "Love", icon: "❤️" },
-    { amharic: "ጊዜ", phonetic: "Gize", english: "Time", icon: "⏱️" },
-    { amharic: "ቤተሰብ", phonetic: "Beteseb", english: "Family", icon: "👨‍👩‍👧‍👦" },
-    { amharic: "እንጀራ", phonetic: "Injera", english: "Injera", icon: "🥞" },
-    { amharic: "ውሃ", phonetic: "Woha", english: "Water", icon: "💧" },
-    { amharic: "አንበሳ", phonetic: "Anbessa", english: "Lion", icon: "🦁" },
-    { amharic: "ፀሐይ", phonetic: "Tsehay", english: "Sun", icon: "☀️" },
-    { amharic: "እናት", phonetic: "Enat", english: "Mother", icon: "👩" },
-    { amharic: "አባት", phonetic: "Abat", english: "Father", icon: "👨" },
-    { amharic: "ጓደኛ", phonetic: "Guadegna", english: "Friend", icon: "🤝" },
-    { amharic: "ትምህርት", phonetic: "Timhirt", english: "Education", icon: "📚" },
-    { amharic: "ሀገር", phonetic: "Hager", english: "Country", icon: "🇪🇹" },
-    { amharic: "ደስታ", phonetic: "Desta", english: "Happiness", icon: "😊" },
-  ];
 
   // Randomly select 5 words on mount
   useEffect(() => {
-    const shuffled = [...allWords].sort(() => 0.5 - Math.random());
+    const shuffled = [...PHRASES].sort(() => 0.5 - Math.random());
     setDisplayWords(shuffled.slice(0, 5));
   }, []);
 
@@ -41,18 +24,43 @@ const Hero: React.FC = () => {
     return () => clearInterval(timer);
   }, [isAutoPlaying, displayWords]);
 
+  const [direction, setDirection] = useState(0);
+
   const handleDragEnd = (e: any, info: any) => {
     setIsAutoPlaying(false); // Stop auto-play once user interacts
     const swipeThreshold = 50;
     if (info.offset.x < -swipeThreshold) {
       // Swiped left, go to next
+      setDirection(1);
       setCurrentWordIndex((prev) => (prev + 1) % displayWords.length);
     } else if (info.offset.x > swipeThreshold) {
       // Swiped right, go to prev
+      setDirection(-1);
       setCurrentWordIndex(
         (prev) => (prev - 1 + displayWords.length) % displayWords.length,
       );
     }
+  };
+
+  const variants = {
+    enter: (direction: number) => {
+      return {
+        x: direction > 0 ? 50 : -50,
+        opacity: 0,
+      };
+    },
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => {
+      return {
+        zIndex: 0,
+        x: direction < 0 ? 50 : -50,
+        opacity: 0,
+      };
+    },
   };
 
   return (
@@ -70,7 +78,7 @@ const Hero: React.FC = () => {
         style={{ backgroundImage: "url(/images/lalibela.png)" }}
       ></div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           {/* Text Content (Left) */}
           <motion.div
@@ -95,7 +103,8 @@ const Hero: React.FC = () => {
 
             <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
               Learn Amharic easily with expert guidance, real-life practice, and
-              a structured, engaging curriculum.
+              a structured curriculum. Classes available <strong>Online</strong>{" "}
+              and <strong>In-Person</strong>.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -161,34 +170,40 @@ const Hero: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-brand-lime border border-black"></div>
                     <div className="w-3 h-3 rounded-full bg-brand-blue border border-black"></div>
                   </div>
+                  {/* Floating 'Live' Badge */}
+                  <div className="px-3 py-1 bg-brand-blue text-white text-xs font-bold rounded-full animate-bounce pointer-events-none shadow-sm">
+                    Phrase of the Day
+                  </div>
                 </div>
 
                 {/* Content */}
                 <div className="text-center flex-1 flex flex-col items-center justify-center relative select-none">
                   {displayWords.length > 0 && (
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence mode="wait" custom={direction}>
                       <motion.div
                         key={currentWordIndex}
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -50 }}
+                        custom={direction}
+                        variants={variants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
                         transition={{ duration: 0.3 }}
-                        className="flex flex-col items-center absolute w-full cursor-grab active:cursor-grabbing"
+                        className="flex flex-col items-center justify-center absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing touch-pan-y"
                         drag="x"
                         dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={0.2}
+                        dragElastic={1}
                         onDragEnd={handleDragEnd}
                       >
                         <div className="text-6xl mb-2">
                           {displayWords[currentWordIndex].icon}
                         </div>
-                        <h2 className="text-6xl sm:text-7xl font-bold font-ethiopic mb-2 pointer-events-none">
+                        <h2 className="text-3xl sm:text-4xl font-bold font-ethiopic mb-3 pointer-events-none px-4 leading-tight">
                           {displayWords[currentWordIndex].amharic}
                         </h2>
-                        <p className="text-2xl font-bold text-brand-blue mb-1 pointer-events-none">
+                        <p className="text-xl font-bold text-brand-blue mb-2 pointer-events-none px-4">
                           {displayWords[currentWordIndex].phonetic}
                         </p>
-                        <p className="text-gray-500 font-medium pointer-events-none">
+                        <p className="text-gray-500 font-medium pointer-events-none px-4">
                           {displayWords[currentWordIndex].english}
                         </p>
                       </motion.div>
@@ -209,11 +224,6 @@ const Hero: React.FC = () => {
                       className={`h-2 rounded-full transition-all duration-300 ${idx === currentWordIndex ? "w-8 bg-black" : "w-2 bg-gray-200 hover:bg-brand-lime"}`}
                     ></button>
                   ))}
-                </div>
-
-                {/* Floating 'Live' Badge */}
-                <div className="absolute bottom-6 right-6 px-3 py-1 bg-brand-blue text-white text-xs font-bold rounded-full animate-bounce pointer-events-none">
-                  Word of the Day
                 </div>
               </div>
             </div>

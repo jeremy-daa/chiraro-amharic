@@ -8,6 +8,7 @@ import Process from './components/Process';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Testimonials from './components/Testimonials';
+import FAQ from "./components/FAQ";
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         <Courses />
         <Testimonials />
         <Process />
+        <FAQ />
         <Contact />
       </main>
       <Footer />

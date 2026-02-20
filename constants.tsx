@@ -1,6 +1,6 @@
-import React from 'react';
-import { GraduationCap, MessageCircle, Heart, CheckCircle } from 'lucide-react';
-import { Course, Feature, ProcessStep } from './types';
+import React from "react";
+import { GraduationCap, MessageCircle, Heart, CheckCircle } from "lucide-react";
+import { Course, Feature, ProcessStep } from "./types";
 
 export const COURSES: Course[] = [
   {
@@ -108,59 +108,225 @@ export const COURSES: Course[] = [
 
 export const FEATURES: Feature[] = [
   {
-    id: 'tesol',
-    title: 'TESOL Certified',
-    description: 'Instructors certified by Arizona State University (ASU) to help you master Amharic.',
-    icon: <GraduationCap className="w-6 h-6 text-chiraro-gold" />
+    id: "tesol",
+    title: "TESOL Certified",
+    description:
+      "Instructors certified by Arizona State University (ASU) to help you master Amharic.",
+    icon: <GraduationCap className="w-6 h-6 text-chiraro-gold" />,
   },
   {
-    id: 'clt',
-    title: 'CLT Methodology',
-    description: 'Modern curriculum based on Communicative Language Teaching (CLT) for effectiveness.',
-    icon: <MessageCircle className="w-6 h-6 text-chiraro-gold" />
+    id: "clt",
+    title: "CLT Methodology",
+    description:
+      "Modern curriculum based on Communicative Language Teaching (CLT) for effectiveness.",
+    icon: <MessageCircle className="w-6 h-6 text-chiraro-gold" />,
   },
   {
-    id: 'practice',
-    title: 'Real-Life Practice',
-    description: 'Lessons focus on practical, real-world usage so you can speak confidently.',
-    icon: <CheckCircle className="w-6 h-6 text-chiraro-gold" />
+    id: "practice",
+    title: "Real-Life Practice",
+    description:
+      "Lessons focus on practical, real-world usage so you can speak confidently.",
+    icon: <CheckCircle className="w-6 h-6 text-chiraro-gold" />,
   },
   {
-    id: 'engaging',
-    title: 'Fun & Engaging',
-    description: 'We make learning Amharic an enjoyable experience with interactive lessons.',
-    icon: <Heart className="w-6 h-6 text-chiraro-gold" />
-  }
+    id: "engaging",
+    title: "Fun & Engaging",
+    description:
+      "We make learning Amharic an enjoyable experience with interactive lessons.",
+    icon: <Heart className="w-6 h-6 text-chiraro-gold" />,
+  },
 ];
 
 export const TESTIMONIALS = [
   {
     id: 1,
-    name: 'Noah Wossen',
-    role: 'Student',
-    text: "Learning Amharic with Yohannes has been an incredible experience. He’s kind, patient, and genuinely excited to see me improve. His encouragement keeps me motivated, and his flexibility with scheduling makes lessons easy to stick with. In just a few weeks, I went from not being able to read or write anything to forming sentences. Highly recommend to anyone starting, or growing in their Amharic journey!"
-  }
+    name: "Noah Wossen",
+    role: "Student",
+    text: "Learning Amharic with Yohannes has been an incredible experience. He’s kind, patient, and genuinely excited to see me improve. His encouragement keeps me motivated, and his flexibility with scheduling makes lessons easy to stick with. In just a few weeks, I went from not being able to read or write anything to forming sentences. Highly recommend to anyone starting, or growing in their Amharic journey!",
+  },
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
   {
     id: 1,
-    title: 'Select Course',
-    description: 'Choose from Survival, Conversational, or Specialized courses.',
+    title: "Select Course",
+    description:
+      "Choose from Survival, Conversational, or Specialized courses.",
   },
   {
     id: 2,
-    title: 'Enroll',
-    description: 'Contact us to sign up for your chosen path.',
+    title: "Enroll",
+    description: "Contact us to sign up for your chosen path.",
   },
   {
     id: 3,
-    title: 'Learn',
-    description: 'Engage in fun, effective lessons with expert instructors.',
+    title: "Learn",
+    description: "Engage in fun, effective lessons with expert instructors.",
   },
   {
     id: 4,
-    title: 'Master',
-    description: 'Speak Amharic with confidence and connect with the culture.',
+    title: "Master",
+    description: "Speak Amharic with confidence and connect with the culture.",
+  },
+];
+
+export const FAQ = [
+  {
+    question: "Do I need any prior knowledge of Amharic to enroll?",
+    answer:
+      "No! We offer courses for all levels, from absolute beginners to advanced learners.",
+  },
+  {
+    question: "What is your teaching methodology?",
+    answer:
+      "We use Communicative Language Teaching (CLT), focusing on real-life conversations and practical usage.",
+  },
+  {
+    question: "Can I take the lesson online?",
+    answer:
+      "Yes, we offer online lessons via Google Meet. We also offer in-person lessons in Addis Ababa, Ethiopia.",
+  },
+  {
+    question: "Are your instructors certified?",
+    answer:
+      "Yes, all our instructors are TESOL certified by Arizona State University (ASU).",
+  },
+  {
+    question: "Can I switch courses after enrolling?",
+    answer:
+      "Yes, you can switch courses at any time based on your progress and needs.",
+  },
+  {
+    question: "Do you offer flexible scheduling?",
+    answer: "Yes, we offer flexible scheduling to accommodate your needs.",
+  },
+];
+
+export const PHRASES = [
+  {
+    amharic: "እንደምን አለህ?",
+    phonetic: "Endämən alläh?",
+    english: "How are you? (to a male)",
+    icon: "👋",
+  },
+  {
+    amharic: "እንደምን አለሽ?",
+    phonetic: "Endämən alläsh?",
+    english: "How are you? (to a female)",
+    icon: "👋",
+  },
+  {
+    amharic: "ስምህ ማን ነው?",
+    phonetic: "Səməh man näw?",
+    english: "What is your name? (to a male)",
+    icon: "🤝",
+  },
+  {
+    amharic: "አመሰግናለሁ",
+    phonetic: "Amäsäggənallähw",
+    english: "Thank you",
+    icon: "🙏",
+  },
+  {
+    amharic: "ይቅርታ",
+    phonetic: "Yəqərta",
+    english: "Excuse me / Sorry",
+    icon: "✋",
+  },
+  {
+    amharic: "እንኳን ደህና መጣህ",
+    phonetic: "Enkwan dähna mäṭṭah",
+    english: "Welcome (to a male)",
+    icon: "🏠",
+  },
+  {
+    amharic: "ጥሩ ነው",
+    phonetic: "Ṭəru näw",
+    english: "It is good",
+    icon: "👍",
+  },
+  {
+    amharic: "አዎ / አይደለም",
+    phonetic: "Awo / Ayidälläm",
+    english: "Yes / No (formal)",
+    icon: "✅",
+  },
+  {
+    amharic: "ስንት ነው?",
+    phonetic: "Səntə näw?",
+    english: "How much is it?",
+    icon: "💰",
+  },
+  {
+    amharic: "የት ነው?",
+    phonetic: "Yätə näw?",
+    english: "Where is it?",
+    icon: "📍",
+  },
+  {
+    amharic: "ውሃ እፈልጋለሁ",
+    phonetic: "Wəha efälləgallähw",
+    english: "I want water",
+    icon: "💧",
+  },
+  {
+    amharic: "በጣም ቆንጆ",
+    phonetic: "Bäṭam qonjo",
+    english: "Very beautiful",
+    icon: "✨",
+  },
+  {
+    amharic: "ምንድነው?",
+    phonetic: "Məndənäw?",
+    english: "What is it?",
+    icon: "🤔",
+  },
+  {
+    amharic: "ደህና እደር",
+    phonetic: "Dähna edär",
+    english: "Good night (to a male)",
+    icon: "🌙",
+  },
+  {
+    amharic: "ደህና እደሪ",
+    phonetic: "Dähna edäri",
+    english: "Good night (to a female)",
+    icon: "🌙",
+  },
+  {
+    amharic: "እወድሃለሁ",
+    phonetic: "Ewäddəhallähw",
+    english: "I love you (to a male)",
+    icon: "❤️",
+  },
+  {
+    amharic: "እወድሻለሁ",
+    phonetic: "Ewäddəšallähw",
+    english: "I love you (to a female)",
+    icon: "❤️",
+  },
+  {
+    amharic: "እባክህ",
+    phonetic: "Ebakəh",
+    english: "Please (to a male)",
+    icon: "🙋‍♂️",
+  },
+  {
+    amharic: "እባክሽ",
+    phonetic: "Ebakəš",
+    english: "Please (to a female)",
+    icon: "🙋‍♀️",
+  },
+  {
+    amharic: "አልገባኝም",
+    phonetic: "Algäbaññəm",
+    english: "I don't understand",
+    icon: "🤷",
+  },
+  {
+    amharic: "ቻው",
+    phonetic: "Ciao",
+    english: "Goodbye (informal)",
+    icon: "👋",
   },
 ];

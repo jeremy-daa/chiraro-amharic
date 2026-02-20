@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
       ></div>
 
       {/* Main Call to Action Section (Replaces Newsletter) */}
-      <div className="container mx-auto px-6 mb-24 relative z-20">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 mb-24 relative z-20">
         <div className="bg-black rounded-[3rem] p-8 md:p-12 relative overflow-hidden shadow-[12px_12px_0px_0px_#D4F853] border-2 border-brand-lime flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Background Accents */}
           <div
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-1">
             <a
@@ -150,13 +150,13 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-black flex items-center justify-center text-black bg-[#43E660] hover:bg-[#32b54a] transition-all hover:-translate-y-1"
               >
-                {/* Linktree style Icon (Custom or text base since proper SVG is complex without import) */}
+                {/* Custom Linktree SVG */}
                 <svg
-                  viewBox="0 0 24 24"
+                  viewBox="0 0 80 97.7"
                   fill="currentColor"
-                  className="w-5 h-5"
+                  className="w-4 h-4 ml-[0.5px] mt-[1px]"
                 >
-                  <path d="M13.418 8.046v4.614h3.766L12 18.068 6.816 12.66h3.766V8.046h2.836zm-8.625 0V5.21H1.583L12 0l10.417 5.21h-3.21v2.836h4.522L12 21.056 1.583 8.046h4.522v-.001z" />
+                  <path d="M0.2,33.1h24.2L7.1,16.7l9.5-9.6L33,23.8V0h14.2v23.8L63.6,7.1l9.5,9.6L55.8,33H80v13.5H55.7l17.3,16.7l-9.5,9.4L40,49.1 L16.5,72.7L7,63.2l17.3-16.7H0V33.1H0.2z M33.1,65.8h14.2v32H33.1V65.8z" />
                 </svg>
               </a>
             </div>
