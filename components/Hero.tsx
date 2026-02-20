@@ -66,9 +66,9 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-brand-bg"
+      className="relative min-h-screen flex items-center pt-20 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-brand-bg"
     >
-      {/* Background Image Accent */}
+      {/* ... backgrounds ... */}
       <div
         className="absolute top-20 left-0 w-64 h-64 opacity-20 pointer-events-none bg-contain bg-no-repeat rotate-12"
         style={{ backgroundImage: "url(/images/adey-abeba.png)" }}
@@ -78,8 +78,8 @@ const Hero: React.FC = () => {
         style={{ backgroundImage: "url(/images/lalibela.png)" }}
       ></div>
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-20">
           {/* Text Content (Left) */}
           <motion.div
             className="lg:w-1/2 text-center lg:text-left"
@@ -87,7 +87,7 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 font-sans text-brand-text">
+            <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-5 md:mb-8 font-sans text-brand-text">
               Speak{" "}
               <span className="inline-block bg-brand-lime px-4 py-1 rounded-full border border-black transform -rotate-2">
                 Amharic,
@@ -101,7 +101,7 @@ const Hero: React.FC = () => {
               Make Friends!
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
               Learn Amharic easily with expert guidance, real-life practice, and
               a structured curriculum. Classes available <strong>Online</strong>{" "}
               and <strong>In-Person</strong>.

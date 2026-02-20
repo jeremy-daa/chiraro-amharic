@@ -25,7 +25,7 @@ const About: React.FC = () => {
           <div className="lg:w-1/2 relative order-2 lg:order-1">
             <div className="bg-white rounded-[2rem] border border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center border border-black">
+                <div className="w-10 h-10 shrink-0 bg-brand-orange rounded-full flex items-center justify-center border border-black">
                   <Sparkles className="text-white w-5 h-5" />
                 </div>
                 <span className="font-bold text-xl">
@@ -47,10 +47,10 @@ const About: React.FC = () => {
                   anywhere in the world, or <strong>In-Person</strong> with us
                   here locally, we offer flexible options to fit your lifestyle.
                 </p>
-                <div className="pt-4">
+                <div className="pt-4 text-center sm:text-left">
                   <a
                     href="#courses"
-                    className="inline-block bg-brand-blue text-white font-bold py-3 px-6 rounded-full border border-black hover:bg-brand-pink transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                    className="inline-block bg-brand-blue text-white font-bold py-3 px-4 sm:px-6 text-sm sm:text-base rounded-full border border-black hover:bg-brand-pink transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap"
                   >
                     🚀 Start Your Journey Today!
                   </a>
