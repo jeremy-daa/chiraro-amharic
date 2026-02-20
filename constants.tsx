@@ -4,100 +4,106 @@ import { Course, Feature, ProcessStep } from './types';
 
 export const COURSES: Course[] = [
   {
-    id: 'survival-amharic',
-    title: 'Survival Amharic',
-    description: 'Speak quickly and confidently in real-life situations like greetings, directions, shopping, and emergencies.',
-    level: 'Beginner',
-    color: 'border-l-chiraro-gold',
-    duration: '15 Weeks',
-    price: '$20/lesson',
+    id: "survival-amharic",
+    title: "Survival Amharic",
+    description:
+      "Speak quickly and confidently in real-life situations like greetings, directions, shopping, and emergencies.",
+    level: "Beginner",
+    color: "border-l-chiraro-gold",
+    duration: "15 Weeks",
+    price: "$17/lesson",
     curriculum: [
-      'Greetings & Introductions',
-      'Directions & Transportation',
-      'Shopping & Bargaining',
-      'Ordering Food & Drinks',
-      'Emergency & Health Phrases',
-      'Cultural Insights & Etiquette'
-    ]
+      "Greetings & Introductions",
+      "Directions & Transportation",
+      "Shopping & Bargaining",
+      "Ordering Food & Drinks",
+      "Emergency & Health Phrases",
+      "Cultural Insights & Etiquette",
+    ],
   },
   {
-    id: 'conversational-amharic-1',
-    title: 'Conversational Amharic 1',
-    description: 'Build your foundation! Form simple sentences, ask/answer questions, and hold basic conversations.',
-    level: 'Intermediate',
-    color: 'border-l-chiraro-red',
-    duration: '30 Weeks',
-    price: '$20/lesson',
+    id: "conversational-amharic-1",
+    title: "Conversational Amharic 1",
+    description:
+      "Build your foundation! Form simple sentences, ask/answer questions, and hold basic conversations.",
+    level: "Intermediate",
+    color: "border-l-chiraro-red",
+    duration: "30 Weeks",
+    price: "$20/lesson",
     curriculum: [
-      'Greetings & Cultural Icebreakers',
-      'Directions, Taxis & Public Transport',
-      'Shopping, Bargaining & Transactions',
-      'Ordering Food & Navigating Menus',
-      'Emergencies & Health Needs',
-      'Social Etiquette & Polite Requests'
-    ]
+      "Greetings & Cultural Icebreakers",
+      "Directions, Taxis & Public Transport",
+      "Shopping, Bargaining & Transactions",
+      "Ordering Food & Navigating Menus",
+      "Emergencies & Health Needs",
+      "Social Etiquette & Polite Requests",
+    ],
   },
   {
-    id: 'conversational-amharic-2',
-    title: 'Conversational Amharic 2',
-    description: 'Reach B2-level fluency. Communicate naturally, express opinions, and understand complex conversations.',
-    level: 'Advanced',
-    color: 'border-l-chiraro-green',
-    duration: '30 Weeks',
-    price: '$20/lesson',
+    id: "conversational-amharic-2",
+    title: "Conversational Amharic 2",
+    description:
+      "Reach B2-level fluency. Communicate naturally, express opinions, and understand complex conversations.",
+    level: "Advanced",
+    color: "border-l-chiraro-green",
+    duration: "30 Weeks",
+    price: "$20/lesson",
     curriculum: [
-      'Opinions & Current Events',
-      'Humor, Sarcasm & Storytelling',
-      'Professional & Formal Interactions',
-      'Emotional Conversations & Advice',
-      'Media, Proverbs & Cultural Analysis'
-    ]
+      "Opinions & Current Events",
+      "Humor, Sarcasm & Storytelling",
+      "Professional & Formal Interactions",
+      "Emotional Conversations & Advice",
+      "Media, Proverbs & Cultural Analysis",
+    ],
   },
   {
-    id: 'travel-amharic',
-    title: 'Travel Amharic',
-    description: 'Communicate effortlessly in airports, hotels, and dining. Perfect for tourists and business travelers.',
-    level: 'Beginner',
-    color: 'border-l-blue-400',
-    duration: '5 Weeks',
-    price: '$20/lesson',
+    id: "travel-amharic",
+    title: "Travel Amharic",
+    description:
+      "Communicate effortlessly in airports, hotels, and dining. Perfect for tourists and business travelers.",
+    level: "Beginner",
+    color: "border-l-blue-400",
+    duration: "5 Weeks",
+    price: "$17/lesson",
     curriculum: [
-      'Key travel phrases',
-      'Asking for directions',
-      'Improve pronunciation',
-      'Cultural tips for travel'
-    ]
+      "Key travel phrases",
+      "Asking for directions",
+      "Improve pronunciation",
+      "Cultural tips for travel",
+    ],
   },
   {
-    id: 'amharic-writing-reading',
-    title: 'Amharic Writing & Reading',
-    description: 'Master the Fidel! Learn to recognize characters, form words, and read basic texts.',
-    level: 'All Levels',
-    color: 'border-l-brand-orange',
-    duration: '5 Weeks',
-    price: '$15/lesson',
+    id: "amharic-writing-reading",
+    title: "Amharic Writing & Reading",
+    description:
+      "Master the Fidel! Learn to recognize characters, form words, and read basic texts.",
+    level: "All Levels",
+    color: "border-l-brand-orange",
+    duration: "5 Weeks",
+    price: "$17/lesson",
     curriculum: [
-      'All Amharic Fidel characters & sounds',
-      'Reading & Writing common words',
-      'Pronunciation & Spelling',
-      'History of Amharic Script'
-    ]
+      "All Amharic Fidel characters & sounds",
+      "Reading & Writing common words",
+      "Pronunciation & Spelling",
+      "History of Amharic Script",
+    ],
   },
   {
-    id: 'industry-amharic',
-    title: 'Industry-Specific Amharic',
-    description: 'Tailored to your field: Medicine, Engineering, Social Work, or Business.',
-    level: 'Professional',
-    color: 'border-l-brand-pink',
-    duration: 'Custom',
-    price: 'Course Dependent',
+    id: "industry-amharic",
+    title: "Industry-Specific Amharic",
+    description:
+      "Tailored to your field: Medicine, Engineering, Social Work, or Business.",
+    level: "Professional",
+    color: "border-l-brand-pink",
+    duration: "Custom",
+    price: "Course Dependent",
     curriculum: [
-      'Medicine & Healthcare Terminology',
-      'Engineering & Construction Vocabulary',
-      'Social Work & Humanitarian Language',
-      'Business Negotiations & Trade'
-    ]
-  }
+      "Medicine & Healthcare Terminology",
+      "Engineering & Construction Vocabulary",
+      "Social Work & Humanitarian Language",
+      "Business Negotiations & Trade",
+    ],
+  },
 ];
 
 export const FEATURES: Feature[] = [

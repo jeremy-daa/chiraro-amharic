@@ -14,43 +14,42 @@ const Navigation: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Features', href: '#features' },
-    { name: 'Courses', href: '#courses' },
-    { name: 'Contact', href: '#contact' },
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Courses", href: "#courses" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-brand-bg/90 backdrop-blur-md border-b border-black/5 py-4'
-          : 'bg-transparent py-6'
+          ? "bg-brand-bg/90 backdrop-blur-md border-b border-black/5 py-4"
+          : "bg-transparent py-6"
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <a href="#" className="block">
-            <img 
-              src="./logo.png" 
-              alt="Chiraro Language School" 
-              className="h-16 w-auto object-contain"
-              onError={(e) => {
-                e.currentTarget.onerror = null; 
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling?.classList.remove('hidden');
-              }}
-            />
-            {/* Fallback in case image is missing during development */}
-            <div className="hidden flex items-center gap-2 group">
-                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border-2 border-transparent group-hover:border-brand-lime">
-                    ጭ
-                </div>
-                <span className="text-xl font-bold tracking-tight text-black">
-                Chiraro
-                </span>
+          <img
+            src="./logo.png"
+            alt="Chiraro Language School"
+            className="h-16 w-auto object-contain"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.style.display = "none";
+              e.currentTarget.nextElementSibling?.classList.remove("hidden");
+            }}
+          />
+          {/* Fallback in case image is missing during development */}
+          <div className="hidden flex items-center gap-2 group">
+            <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border-2 border-transparent group-hover:border-brand-lime">
+              ጭ
             </div>
+            <span className="text-xl font-bold tracking-tight text-black">
+              Chiraro
+            </span>
+          </div>
         </a>
 
         {/* Desktop Menu */}
@@ -64,6 +63,12 @@ const Navigation: React.FC = () => {
               {link.name}
             </a>
           ))}
+          <a
+            href="#assessment"
+            className="text-sm font-bold text-gray-600 hover:text-black transition-colors"
+          >
+            Take Assessment
+          </a>
           <a
             href="#contact"
             className="px-6 py-3 text-sm font-bold bg-black text-white rounded-full hover:bg-brand-lime hover:text-black transition-all border border-black"
@@ -94,7 +99,14 @@ const Navigation: React.FC = () => {
               {link.name}
             </a>
           ))}
-            <a
+          <a
+            href="#assessment"
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-lg font-bold text-gray-800 hover:text-brand-blue"
+          >
+            Take Assessment
+          </a>
+          <a
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
             className="text-center px-5 py-3 text-sm font-bold bg-black text-white rounded-full hover:bg-brand-lime hover:text-black transition-colors"
