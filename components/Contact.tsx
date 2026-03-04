@@ -3,11 +3,88 @@ import { Send, Mail, Phone, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { COURSES } from "../constants"; // Import COURSES
+import Toast, { ToastType } from "./Toast";
 
 const Contact: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState("General Inquiry");
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<ToastType>("info");
+  const [isToastVisible, setIsToastVisible] = useState(false);
+
+  const showToast = (message: string, type: ToastType) => {
+    setToastMessage(message);
+    setToastType(type);
+    setIsToastVisible(true);
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      showToast("Please fill in all required fields.", "error");
+      return;
+    }
+
+    setStatus("submitting");
+
+    try {
+      const response = await fetch(
+        "https://chiraro-mailer.vercel.app/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: selectedSubject,
+            message: formData.message,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to send message. Please try again.");
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        showToast(
+          result.message || "Your message has been sent successfully.",
+          "success",
+        );
+      } else {
+        throw new Error(result.message || "Failed to send message.");
+      }
+    } catch (error) {
+      setStatus("error");
+      showToast(
+        error instanceof Error ? error.message : "An unknown error occurred.",
+        "error",
+      );
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,6 +109,12 @@ const Contact: React.FC = () => {
       id="contact"
       className="py-24 bg-brand-bg relative overflow-hidden"
     >
+      <Toast
+        message={toastMessage}
+        type={toastType}
+        isVisible={isToastVisible}
+        onClose={() => setIsToastVisible(false)}
+      />
       {/* Background Image Accent */}
       <div
         className="absolute bottom-0 left-0 w-64 h-64 opacity-20 pointer-events-none bg-contain bg-no-repeat bg-bottom-left"
@@ -103,19 +186,9 @@ const Contact: React.FC = () => {
 
           <form
             id="contact-form"
-            action="https://formsubmit.co/chebses2014@gmail.com"
-            method="POST"
+            onSubmit={handleSubmit}
             className="bg-white p-8 rounded-[2rem] border border-black shadow-[10px_10px_0px_0px_#000]"
           >
-            {/* FormSubmit Configuration */}
-            <input
-              type="hidden"
-              name="_subject"
-              value="New Submission from Chiraro Website"
-            />
-            <input type="hidden" name="_captcha" value="false" />
-            {/* <input type="hidden" name="_next" value="https://your-domain.com/thanks.html" />  -- Optional: Add thank you page later */}
-
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-bold text-black mb-2">
@@ -125,6 +198,8 @@ const Contact: React.FC = () => {
                   type="text"
                   name="name"
                   required
+                  value={formData.name}
+                  onChange={handleInputChange}
                   placeholder="Enter your name"
                   className="w-full bg-brand-bg border border-gray-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
                 />
@@ -137,6 +212,8 @@ const Contact: React.FC = () => {
                   type="email"
                   name="email"
                   required
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder="Your email address"
                   className="w-full bg-brand-bg border border-gray-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
                 />
@@ -192,6 +269,8 @@ const Contact: React.FC = () => {
                 <textarea
                   name="message"
                   required
+                  value={formData.message}
+                  onChange={handleInputChange}
                   rows={4}
                   placeholder="How can we help you?"
                   className="w-full bg-brand-bg border border-gray-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors resize-none"
@@ -199,9 +278,16 @@ const Contact: React.FC = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-brand-lime hover:text-black transition-all flex items-center justify-center gap-2 border border-transparent hover:border-black"
+                disabled={status === "submitting"}
+                className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-brand-lime hover:text-black transition-all flex items-center justify-center gap-2 border border-transparent hover:border-black disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <Send className="w-5 h-5" /> Send Message
+                {status === "submitting" ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" /> Send Message
+                  </>
+                )}
               </button>
             </div>
           </form>

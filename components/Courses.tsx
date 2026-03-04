@@ -150,7 +150,7 @@ const Courses: React.FC = () => {
               </button>
 
               <div className="p-8 md:p-10">
-                <div className="flex flex-wrap items-center gap-3 mb-6">
+                <div className="flex flex-wrap items-center gap-3 mb-6 pr-12 md:pr-8 lg:pr-0 pt-6 md:pt-0">
                   <span className="px-4 py-1.5 bg-brand-lime border border-black rounded-full text-xs font-bold uppercase tracking-wider">
                     {selectedCourse.level}
                   </span>
@@ -188,7 +188,7 @@ const Courses: React.FC = () => {
 
                 <div className="flex gap-4">
                   <a
-                    href="#contact"
+                    href="#contact-form"
                     onClick={handleCloseModal}
                     className="flex-1 py-4 bg-black text-white font-bold rounded-xl hover:bg-brand-lime hover:text-black hover:border-black border border-transparent transition-all text-center"
                   >

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Send, ChevronDown, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { COURSES } from "../constants";
+import Toast, { ToastType } from "./Toast";
 
 interface EnrollModalProps {
   isOpen: boolean;
@@ -9,10 +10,96 @@ interface EnrollModalProps {
   defaultCourse?: string;
 }
 
-const EnrollModal: React.FC<EnrollModalProps> = ({ isOpen, onClose, defaultCourse }) => {
+const EnrollModal: React.FC<EnrollModalProps> = ({
+  isOpen,
+  onClose,
+  defaultCourse,
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState(defaultCourse || "General Inquiry");
+  const [selectedSubject, setSelectedSubject] = useState(
+    defaultCourse || "General Inquiry",
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    contact_info: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<ToastType>("info");
+  const [isToastVisible, setIsToastVisible] = useState(false);
+
+  const showToast = (message: string, type: ToastType) => {
+    setToastMessage(message);
+    setToastType(type);
+    setIsToastVisible(true);
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.contact_info) {
+      showToast("Please fill in all required fields.", "error");
+      return;
+    }
+
+    setStatus("submitting");
+
+    try {
+      const response = await fetch(
+        "https://chiraro-mailer.vercel.app/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.contact_info,
+            subject: `Enrollment: ${selectedSubject}`,
+            message: formData.message || "No additional message",
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to send message. Please try again.");
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("success");
+        setFormData({ name: "", contact_info: "", message: "" });
+        showToast(
+          result.message || "Enrollment request sent successfully!",
+          "success",
+        );
+        setTimeout(() => {
+          onClose();
+          setStatus("idle");
+        }, 3000);
+      } else {
+        throw new Error(result.message || "Failed to send enrollment request.");
+      }
+    } catch (error) {
+      setStatus("error");
+      showToast(
+        error instanceof Error ? error.message : "An unknown error occurred.",
+        "error",
+      );
+    }
+  };
 
   useEffect(() => {
     setSelectedSubject(defaultCourse || "General Inquiry");
@@ -46,6 +133,12 @@ const EnrollModal: React.FC<EnrollModalProps> = ({ isOpen, onClose, defaultCours
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <Toast
+            message={toastMessage}
+            type={toastType}
+            isVisible={isToastVisible}
+            onClose={() => setIsToastVisible(false)}
+          />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -67,21 +160,14 @@ const EnrollModal: React.FC<EnrollModalProps> = ({ isOpen, onClose, defaultCours
             </button>
             <h3 className="text-3xl font-bold mb-2">Start Learning</h3>
             <p className="text-gray-600 mb-6">
-              Fill out the form below to enroll, and we will get back to you with the next steps!
+              Fill out the form below to enroll, and we will get back to you
+              with the next steps!
             </p>
             <form
               id="enroll-form"
-              action="https://formsubmit.co/chebses2014@gmail.com"
-              method="POST"
+              onSubmit={handleSubmit}
               className="space-y-6"
             >
-              <input
-                type="hidden"
-                name="_subject"
-                value={`New Enrollment: ${selectedSubject}`}
-              />
-              <input type="hidden" name="_captcha" value="false" />
-
               <div>
                 <label className="block text-sm font-bold text-black mb-2">
                   Name
@@ -90,6 +176,8 @@ const EnrollModal: React.FC<EnrollModalProps> = ({ isOpen, onClose, defaultCours
                   type="text"
                   name="name"
                   required
+                  value={formData.name}
+                  onChange={handleInputChange}
                   placeholder="Enter your name"
                   className="w-full bg-brand-bg border border-gray-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
                 />
@@ -102,6 +190,8 @@ const EnrollModal: React.FC<EnrollModalProps> = ({ isOpen, onClose, defaultCours
                   type="text"
                   name="contact_info"
                   required
+                  value={formData.contact_info}
+                  onChange={handleInputChange}
                   placeholder="How should we reach you?"
                   className="w-full bg-brand-bg border border-gray-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
                 />
@@ -156,6 +246,8 @@ const EnrollModal: React.FC<EnrollModalProps> = ({ isOpen, onClose, defaultCours
                 </label>
                 <textarea
                   name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   rows={3}
                   placeholder="Any specific goals or questions?"
                   className="w-full bg-brand-bg border border-gray-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors resize-none"
@@ -163,9 +255,16 @@ const EnrollModal: React.FC<EnrollModalProps> = ({ isOpen, onClose, defaultCours
               </div>
               <button
                 type="submit"
-                className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-brand-lime hover:text-black transition-all flex items-center justify-center gap-2 border border-transparent hover:border-black"
+                disabled={status === "submitting"}
+                className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-brand-lime hover:text-black transition-all flex items-center justify-center gap-2 border border-transparent hover:border-black disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <Send className="w-5 h-5" /> Submit
+                {status === "submitting" ? (
+                  "Submitting..."
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" /> Submit
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
