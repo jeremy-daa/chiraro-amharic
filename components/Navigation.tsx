@@ -38,7 +38,7 @@ const Navigation: React.FC = () => {
           <a href="#" className="block">
             {!logoError ? (
               <img
-                src="/logo.png"
+                src="/images/logo.png"
                 alt="Chiraro Language School"
                 className="h-16 w-auto object-contain"
                 onError={() => setLogoError(true)}

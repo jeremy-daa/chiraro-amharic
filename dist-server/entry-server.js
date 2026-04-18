@@ -631,6 +631,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -652,26 +653,18 @@ const Navigation = () => {
         className: `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-brand-bg/90 backdrop-blur-md border-b border-black/5 py-4" : "bg-transparent py-6"}`,
         children: [
           /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 flex justify-between items-center", children: [
-            /* @__PURE__ */ jsxs("a", { href: "#", className: "block", children: [
-              /* @__PURE__ */ jsx(
-                "img",
-                {
-                  src: "./logo.png",
-                  alt: "Chiraro Language School",
-                  className: "h-16 w-auto object-contain",
-                  onError: (e) => {
-                    var _a;
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.style.display = "none";
-                    (_a = e.currentTarget.nextElementSibling) == null ? void 0 : _a.classList.remove("hidden");
-                  }
-                }
-              ),
-              /* @__PURE__ */ jsxs("div", { className: "hidden flex items-center gap-2 group", children: [
-                /* @__PURE__ */ jsx("div", { className: "w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border-2 border-transparent group-hover:border-brand-lime", children: "ጭ" }),
-                /* @__PURE__ */ jsx("span", { className: "text-2xl font-bold tracking-tight text-black", children: "Chiraro Amharic" })
-              ] })
-            ] }),
+            /* @__PURE__ */ jsx("a", { href: "#", className: "block", children: !logoError ? /* @__PURE__ */ jsx(
+              "img",
+              {
+                src: "/images/logo.png",
+                alt: "Chiraro Language School",
+                className: "h-16 w-auto object-contain",
+                onError: () => setLogoError(true)
+              }
+            ) : /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 group", children: [
+              /* @__PURE__ */ jsx("div", { className: "w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border-2 border-transparent group-hover:border-brand-lime", children: "ጭ" }),
+              /* @__PURE__ */ jsx("span", { className: "text-2xl font-bold tracking-tight text-black", children: "Chiraro Amharic" })
+            ] }) }),
             /* @__PURE__ */ jsxs("div", { className: "hidden md:flex items-center gap-8", children: [
               navLinks.map((link) => /* @__PURE__ */ jsx(
                 "a",
@@ -1813,10 +1806,7 @@ const Footer = () => {
                   href: "#",
                   className: "block mb-6",
                   onClick: (e) => e.preventDefault(),
-                  children: /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
-                    /* @__PURE__ */ jsx("div", { className: "w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border border-black", children: "ጭ" }),
-                    /* @__PURE__ */ jsx("span", { className: "text-2xl font-bold text-black", children: "Chiraro" })
-                  ] })
+                  children: /* @__PURE__ */ jsx("img", { src: "/images/logo.png", alt: "Chiraro", className: "h-12 w-auto object-contain" })
                 }
               ),
               /* @__PURE__ */ jsx("p", { className: "text-gray-600 text-sm leading-relaxed mb-6", children: "Chiraro Amharic is a premier language school dedicated to keeping the Amharic language alive and accessible globally." }),

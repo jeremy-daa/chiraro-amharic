@@ -27,7 +27,12 @@ async function prerender() {
   
   const headInject = `
     <link rel="canonical" href="${DOMAIN}/" />
-    <meta name="description" content="Learn Amharic effectively with Chiraro Amharic Language School." />
+    <meta name="description" content="Master Amharic with Chiraro Language School. Enjoy interactive courses, native-speaker instruction, and a comprehensive curriculum designed for all fluency levels." />
+    <meta property="og:title" content="Chiraro Amharic | Language School" />
+    <meta property="og:description" content="Master Amharic with Chiraro Language School. Enjoy interactive courses, native-speaker instruction, and a comprehensive curriculum designed for all fluency levels." />
+    <meta property="og:image" content="${DOMAIN}/images/logo.png" />
+    <meta property="og:url" content="${DOMAIN}/" />
+    <meta property="og:type" content="website" />
     <script type="application/ld+json">
       ${JSON.stringify(schema)}
     </script>

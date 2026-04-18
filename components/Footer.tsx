@@ -86,12 +86,7 @@ const Footer: React.FC = () => {
               className="block mb-6"
               onClick={(e) => e.preventDefault()}
             >
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border border-black">
-                  ጭ
-                </div>
-                <span className="text-2xl font-bold text-black">Chiraro</span>
-              </div>
+              <img src="/images/logo.png" alt="Chiraro" className="h-12 w-auto object-contain" />
             </a>
             <p className="text-gray-600 text-sm leading-relaxed mb-6">
               Chiraro Amharic is a premier language school dedicated to keeping
