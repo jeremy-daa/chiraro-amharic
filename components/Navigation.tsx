@@ -6,6 +6,7 @@ const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,25 +36,23 @@ const Navigation: React.FC = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24 flex justify-between items-center">
           {/* Logo */}
           <a href="#" className="block">
-            <img
-              src="./logo.png"
-              alt="Chiraro Language School"
-              className="h-16 w-auto object-contain"
-              onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.style.display = "none";
-                e.currentTarget.nextElementSibling?.classList.remove("hidden");
-              }}
-            />
-            {/* Fallback in case image is missing during development */}
-            <div className="hidden flex items-center gap-2 group">
-              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border-2 border-transparent group-hover:border-brand-lime">
-                ጭ
+            {!logoError ? (
+              <img
+                src="/logo.png"
+                alt="Chiraro Language School"
+                className="h-16 w-auto object-contain"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <div className="flex items-center gap-2 group">
+                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-ethiopic font-bold text-brand-lime text-xl border-2 border-transparent group-hover:border-brand-lime">
+                  ጭ
+                </div>
+                <span className="text-2xl font-bold tracking-tight text-black">
+                  Chiraro Amharic
+                </span>
               </div>
-              <span className="text-2xl font-bold tracking-tight text-black">
-                Chiraro Amharic
-              </span>
-            </div>
+            )}
           </a>
 
           {/* Desktop Menu */}
